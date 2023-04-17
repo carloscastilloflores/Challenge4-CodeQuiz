@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Quiz </title>
+    <link rel="stylesheet" href="./assets/style.css">
+
+</head>
+<body>
+    <div>
+        <a>View Highscores</a>
+        <a class="time">Time: <span id="timer">75</span></a>
+    </div>
+
+
+    <div class="content" id="content"> 
+        <h1> Coding Quiz Challenge </h1>
+        <p>Try to answer the following code-related questions within the time limit.
+            Keep in mind that incorrect answers will penalize your scoretime by ten seconds.
+        </p>
+        <button class="start-quiz-btn" id="start-quiz-btn">Start Quiz</button>
+    </div>
+
+     <div class="first-question" id="question-container"> 
+        <div>
+             <h1 id="question">What is the answer to this questions?:</h1>
+          </div>
+   
+        <div class="options-list">
+            <div >
+                <p class="choice-text" data-number="1">  Choice 1 </p>
+            </div>
+            <div> 
+                <p class="choice-text" data-number="2">  Choice 2 </p>
+            </div>
+            <div> 
+                <p class="choice-text" data-number="3">  Choice 3 </p>
+            </div>
+            <div> 
+                <p class="choice-text" data-number="4">  Choice 4 </p>
+            </div>
+            <div class="correct-response"> Right! </div>
+            <div class="incorrect-response"> Wrong! </div>
+
+        </div>
+    </div>
+    <script src="./assets/script.js"></script>
+</body>
+</html>
