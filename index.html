@@ -43,7 +43,36 @@
             </div>
             <div class="correct-response"> Right! </div>
             <div class="incorrect-response"> Wrong! </div>
-
+        </div>
+    </div>
+    <div class="form-container">
+        <h1> All done!</h1>
+        <div class="form-elements" > 
+            <p class="score"></p>
+        </div> 
+        <form>
+            <label for="initials">Enter initials:</label>
+            <input
+                type="text"
+                name="initials"
+                id="initials"
+                placeholder="Ex. CACF"
+            />
+            <button
+            type="btnsubmit"
+            class="btn-submit"
+            id="saveScoreBtn"
+            >
+            Submit 
+            </button>
+        </form>
+    </div> 
+    <div class="highscore-container">
+        <h1>Highscores</h1>
+        <ul id="highscore-list"></ul>
+        <div class="btn-container">
+            <button class="btn">Start Again</button>
+            <button class="btn">Clear Highscores</button>
         </div>
     </div>
     <script src="./assets/script.js"></script>

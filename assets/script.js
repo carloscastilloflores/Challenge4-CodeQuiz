@@ -7,13 +7,25 @@ var choices = Array.from(document.getElementsByClassName("choice-text"));
 var currentQuestion = {};
 var acceptingAnswers = false; 
 var score = 0; 
+var finalScore = document.querySelector(".score");
+// var finalScore = document.getElementById("score");
 var questionCounter = 0; 
 var availableQuestions = []; 
 var correctAnswer = document.getElementsByClassName("correct-response");
 var incorrectAnswer = document.getElementsByClassName("incorrect-response");
+var formContainer = document.getElementsByClassName("form-container");
+var highScoreContainer = document.getElementsByClassName(".highscore-container");
+
+var submitButton = document.querySelector("#saveScoreBtn");
+
+var storedInitials = document.getElementById('initials'); 
+//var storedInitials = initials;
+// var storedInitials = localStorage.getItem(initials);
 
 var timerElement = document.getElementById('timer');
-var timer;
+let timerCount = 75;
+
+var userData = [];
 
 var questions = [
     {
@@ -75,10 +87,35 @@ startGame = () => {
 
 }
 
+function startTimer() {
+    // Set the initial timer count
+
+  
+    // Update the timer element with the initial count
+    timerElement.textContent = timerCount;
+  
+    // Update the timer every second
+    timerInterval = setInterval(function() {
+      // Decrease the timer count by 1
+      timerCount--;
+  
+      // Update the timer element with the new count
+      timerElement.textContent = timerCount;
+      // Check if the timer has reached 0
+      if (timerCount <= 0) {
+        // Stop the timer interval
+        clearInterval(timerInterval);
+        // Perform any actions when the timer reaches 0
+        // For example, show game over message, end the quiz, etc.
+        
+      }
+    }, 1000); // 1000 milliseconds = 1 second
+  }
+
 getNewQuestion = () => {
-    if(availableQuestions.length === 0 || questionCounter >MAX_QUESTIONS) {
-        return window.location.assign("/end.html");
-    }
+    if (availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS || timerCount === 0) {
+        endGame();
+    } 
     questionCounter++; 
     const questionIndex = Math.floor(Math.random() * availableQuestions.length); 
     currentQuestion = availableQuestions[questionIndex];
@@ -112,8 +149,10 @@ choices.forEach(choice => {
         console.log(selectedAnswer == currentQuestion.answer);
         //Displaying the HTML Element 
         if (selectedAnswer == currentQuestion.answer) {
+            timerCount += 10;
             document.getElementsByClassName('correct-response')[0].style.display = "block";
         } else {
+            timerCount -= 10;
             document.getElementsByClassName('incorrect-response')[0].style.display = "block"; 
         }
 
@@ -144,32 +183,60 @@ choices.forEach(choice => {
 startGame();
 
 
+function endGame() {
+    clearInterval(timerInterval); // Stop the timer interval
+    firstQuestion.style.display = 'none';
+    document.getElementsByClassName('form-container')[0].style.display = "block";
+    console.log("Result:" + (" " + timerCount + "."));
+    finalScore.textContent = "Your final score is " + timerCount + ".";
+    //document.getElementById('score').textContent = timerCount;
+//   return window.location.assign("/end.html");
+    }
 
 
-function startTimer() {
-    // Set the initial timer count
-    var timerCount = 75;
-  
-    // Update the timer element with the initial count
-    timerElement.textContent = timerCount;
-  
-    // Update the timer every second
-    var timerInterval = setInterval(function() {
-      // Decrease the timer count by 1
-      timerCount--;
-  
-      // Update the timer element with the new count
-      timerElement.textContent = timerCount;
-  
-      // Check if the timer has reached 0
-      if (timerCount <= 0) {
-        // Stop the timer interval
-        clearInterval(timerInterval);
-  
-        // Perform any actions when the timer reaches 0
-        // For example, show game over message, end the quiz, etc.
-      }
-    }, 1000); // 1000 milliseconds = 1 second
-  }
-  
+function saveScore() {
+    // Save related form data as an object
+    var score = timerCount.toString();
+    var userData = {
+        userName: storedInitials.value,
+        score: score,
+    };
+   
+    // Use .setItem() to store object in storage and JSON.stringify to convert it as a string
+    localStorage.setItem("userData", JSON.stringify(userData));
+    }
+G
+  /* Not working, im trying to push new user information to the user data array. 
+function saveLastScore() {
+    var userName = storedInitials.value;
+    var score = score;
+
+    var storedData = JSON.parse(localStorage.getItem("userData"));
+    if (!storedData){
+        var ArrayInfo = [{"userName": storedInitials, "score": score}]
+        localStorage.setItem("userData", JSON.stringify(ArrayInfo)); 
+    }   else {
+        storedData.push({"userName": storedInitials, "score": score}); 
+        localStorage.setItem("userData", JSON.stringify(info));
+    } 
+
+
+    var userData = {
+        userName: storedInitials.value,
+        score: score,
+     }
+     if (Array.isArray(storedData)) {
+        storedData.push(userData);
+      }*/
+
+
+submitButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    saveScore();
+   // saveLastScore();
+
+    window.location.href = "./highscores.html";
+    //     localStorage.setItem('initials', storedInitials);
+    //     localStorage.setItem('score', timerCount);
+    });
 

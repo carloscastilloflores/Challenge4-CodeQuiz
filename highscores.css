@@ -98,7 +98,7 @@ ul {
     color:#9e9e9e;
 }
 .form-container {
-    display: none;
+    display: block;
     margin: auto;
     padding-top: 30px;
     width: 500px;
@@ -114,9 +114,8 @@ form {
     flex-direction: row;
     position: center; 
     align-items: center; 
+    padding: .5rem;
     font-size: 16px;
- 
-
 }
 .form-elements {
     display:flex;
@@ -126,6 +125,7 @@ form {
     display:inline-block;
 
 }
+/* New code */ 
 input {
     border: 1px solid;
     border-radius: 4px;
@@ -143,21 +143,12 @@ input {
     display: none;
     padding-left: 10px;
 }
-p .score {
-    font-size: 25px;
-}
 label {
-    font-size: 25px;
-    padding-right: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font:1.5rem;
 }
-.highscore-container {
-    display: none; 
-    margin: auto;
-    padding-top: 30px;
-    width: 500px;
-}
-.btn-container{
-    margin: auto;
-    padding-left: 140px;
 
+li {
+    background-color:rgb(66, 66, 159 0.5);
+    font-size: 20px;
 }
