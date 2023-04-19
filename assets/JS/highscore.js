@@ -2,20 +2,24 @@ var timeCount = localStorage.getItem("score");
 var initials = localStorage.getItem("userName");
 var highScoreList = document.getElementById('highscore-list');
 var startGame = document.querySelector('#btn-start');
-var clearGame = document.getElementsByClassName('.btn-clear');
+var clearGame = document.querySelector("#btn-clear");
 var userData = [];
 renderScores()
 
  function renderScores() {
-    highScoreList.innerHTML ="Hola";
-    highScoreList.textContent = userData.length;
+   // highScoreList.innerHTML ="Hola";
+   //  highScoreList.textContent = userData.length;
     
     var info = JSON.parse(localStorage.getItem("userData"));
+    var number = 1 + ". ";
+  if (info) {
     for (var i = 0; i < info.length; i++) {
+
         var listScore = document.createElement("li");
-        listScore.textContent = "Name" + info[i].initials + "Score" +  info[i].timeCount; 
+        listScore.textContent = number++ + ". " + info[i].userName + " " + "-" + " " +  info[i].score; 
         highScoreList.appendChild(listScore);
-}}
+    }}
+    };
 
 startGame.addEventListener("click", function(event) {
     
@@ -38,13 +42,19 @@ function  saveHighscore() {
     localStorage.setItem('score', timeCount);
 }
 
+clearGame.addEventListener("click", function(event) {
+    event.preventDefault();
+    localStorage.clear();
+    highScoreList.style.display = 'none';
+    renderScores(); 
+    });
 
 function init() {
     var storedData = JSON.parse(localStorage.getItem("userData"));
     if (storedData !== null) {
     userData = storedData;
     }
-} 
+};
 
 init() 
 /*

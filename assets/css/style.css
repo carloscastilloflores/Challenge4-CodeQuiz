@@ -159,5 +159,5 @@ label {
 .btn-container{
     margin: auto;
     padding-left: 140px;
-
+    list-style:none;
 }

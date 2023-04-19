@@ -193,7 +193,6 @@ function endGame() {
 //   return window.location.assign("/end.html");
     }
 
-
 function saveScore() {
     // Save related form data as an object
     var score = timerCount.toString();
@@ -201,11 +200,22 @@ function saveScore() {
         userName: storedInitials.value,
         score: score,
     };
-   
-    // Use .setItem() to store object in storage and JSON.stringify to convert it as a string
-    localStorage.setItem("userData", JSON.stringify(userData));
+
+    var storedData = JSON.parse(localStorage.getItem("userData"));
+
+    if (!storedData){
+        storedData = []; // create an empty array if storedData is null or undefined
     }
-G
+    if (Array.isArray(storedData)) {
+        storedData.push(userData);
+      } else {
+        storedData = [userData];
+      }
+
+    // Use .setItem() to store object in storage and JSON.stringify to convert it as a string
+    localStorage.setItem("userData", JSON.stringify(storedData));
+    }
+
   /* Not working, im trying to push new user information to the user data array. 
 function saveLastScore() {
     var userName = storedInitials.value;
